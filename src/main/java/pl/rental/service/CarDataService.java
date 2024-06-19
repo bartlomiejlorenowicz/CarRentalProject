@@ -68,12 +68,14 @@ public class CarDataService {
     }
 
     private void saveCarData(CarDataResponse carData) {
-        Car car = new Car();
-        car.setMake(carData.getMake());
-        car.setModel(carData.getModel());
-        car.setYear(carData.getYear());
-        car.setPrice(carData.getPrice());
-        car.setType(carData.getType());
+//        Car car = new Car();
+//        car.setMake(carData.getMake());
+//        car.setModel(carData.getModel());
+//        car.setYear(carData.getYear());
+//        car.setPrice(carData.getPrice());
+//        car.setType(carData.getType());
+        ObjectMapper mapper = new ObjectMapper();
+        Car car = mapper.convertValue(carData, Car.class);
 
         carRepository.save(car);
     }
