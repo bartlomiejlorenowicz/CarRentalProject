@@ -15,7 +15,7 @@
         <div class="text-center">
             <img src="<c:url value='/static/img/car-image.jpg' />" alt="Car Image" class="img-fluid">
         </div>
-        <form class="rental-form" method="post">
+        <form class="rental-form" action="/cars/search" method="post">
             <h2 class="text-center">Wyszukaj samochód</h2>
             <input type="text" name="make" placeholder="Marka">
             <input type="text" name="model" placeholder="Model">
@@ -23,9 +23,9 @@
             <input type="number" name="price" placeholder="Cena maksymalna">
             <select name="type">
                 <option value="">Typ</option>
-                <option value="sedan">Sedan</option>
-                <option value="suv">SUV</option>
-                <option value="hatchback">Hatchback</option>
+                <c:forEach var="type" items="${carTypes}">
+                    <option value="${type}">${type}</option>
+                </c:forEach>
             </select>
             <button type="submit" class="btn btn-primary btn-block">Wyszukaj</button>
         </form>

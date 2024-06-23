@@ -11,6 +11,7 @@ import pl.rental.service.CarDataService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class CarController {
@@ -31,5 +32,12 @@ public class CarController {
         List<Car> allCars = carDataService.getAllCars();
         model.addAttribute("cars", allCars);
         return "all-cars";
+    }
+
+    @GetMapping("/")
+    public String showHomePage(Model model) {
+        Set<String> carTypes = carDataService.getAllUniqueCarTypes();
+        model.addAttribute("carTypes", carTypes);
+        return "index";
     }
 }

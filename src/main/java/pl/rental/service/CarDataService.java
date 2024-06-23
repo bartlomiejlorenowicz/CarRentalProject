@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.rental.model.Car;
@@ -14,9 +16,7 @@ import pl.rental.repository.CarRepository;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class CarDataService {
@@ -29,6 +29,7 @@ public class CarDataService {
     private final String apiUrl = "https://car-data.p.rapidapi.com/cars";
 
     private CarRepository carRepository;
+    private static Logger logger = LoggerFactory.getLogger(CarDataService.class);
 
     public CarDataService(CarRepository carRepository) {
         this.carRepository = carRepository;
@@ -87,5 +88,24 @@ public class CarDataService {
 
     public List<Car>getAllCars() {
         return carRepository.findAll();
+    }
+
+    public List<Car> searchCars(String make, String model, Integer year, BigDecimal price, String type) {
+        if (type != null) {
+            type = type.toLowerCase().trim();
+        }
+        List<Car> cars = carRepository.findCarsByCriteria(make, model, year, price, type);
+        logger.info("found {} cars matching criteria", cars.size());
+        return cars;
+    }
+
+    public Set<String> getAllUniqueCarTypes() {
+        List<Car> cars = carRepository.findAll();
+        Set<String> uniqueTypes = new HashSet<>();
+        for (Car car : cars) {
+            String[] types = car.getType().split(",");
+            uniqueTypes.addAll(Arrays.asList(types));
+        }
+        return uniqueTypes;
     }
 }
