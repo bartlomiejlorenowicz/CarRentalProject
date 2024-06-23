@@ -12,8 +12,11 @@ import pl.rental.model.api.CarDataResponse;
 import pl.rental.repository.CarRepository;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @Service
 public class CarDataService {
@@ -68,15 +71,21 @@ public class CarDataService {
     }
 
     private void saveCarData(CarDataResponse carData) {
-//        Car car = new Car();
-//        car.setMake(carData.getMake());
-//        car.setModel(carData.getModel());
-//        car.setYear(carData.getYear());
-//        car.setPrice(carData.getPrice());
-//        car.setType(carData.getType());
         ObjectMapper mapper = new ObjectMapper();
         Car car = mapper.convertValue(carData, Car.class);
 
+        car.setPrice(generateRandomPrice());
+
         carRepository.save(car);
+    }
+
+    private BigDecimal generateRandomPrice() {
+        Random random = new Random();
+        double randomPrice = random.nextDouble(100 - 30) + 30;
+        return BigDecimal.valueOf(randomPrice).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public List<Car>getAllCars() {
+        return carRepository.findAll();
     }
 }
