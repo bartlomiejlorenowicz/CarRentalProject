@@ -28,5 +28,6 @@ public class Reservation {
     private LocalDateTime returnDate;
 
     @Column(nullable = false)
+
     private String paymentStatus;
 }

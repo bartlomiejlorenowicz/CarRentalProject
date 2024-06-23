@@ -24,7 +24,7 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 }

@@ -1,16 +1,16 @@
 package pl.rental.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.rental.dto.UserDto;
 import pl.rental.model.Address;
 import pl.rental.model.User;
 import pl.rental.service.UserService;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -41,7 +41,42 @@ public class UserController {
 
         user.setAddress(address);
 
+        userService.saveAddress(address);
         userService.saveUser(user);
-        return "redirect:/login";
+        return "redirect:/users/login";
+    }
+
+    @GetMapping("/dashboard")
+    public String showDashBoard(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+        return "dashboard";
+    }
+
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("header", "header.jsp");
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginUser(@RequestParam("username") String username,
+                            @RequestParam("password") String password,
+                            HttpSession session, Model model) {
+        User user = userService.validateUser(username, password);
+        if (user != null) {
+            session.setAttribute("user", user);
+            return "redirect:/users/dashboard";
+        } else {
+            model.addAttribute("error", "Invalid username or password");
+            return "login";
+        }
+    }
+
+    @GetMapping("/logout")
+    public String logoutUser(HttpSession session) {
+        session.invalidate();
+        return "redirect:/users/login";
     }
 }

@@ -1,7 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- header.jsp -->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -127,13 +126,15 @@
                                 </div>
                             </c:when>
                             <c:otherwise>
-                                <a class="nav-link nav-link-login" href="<c:url value='/login' />">
-                                    <i class="fas fa-fw fa-sign-in-alt"></i>
-                                    <span>Login</span>
-                                </a>
+                                <form action="<c:url value='/users/login' />" method="post" class="form-inline my-2 my-lg-0">
+                                    <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username" required>
+                                    <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required>
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                                </form>
                             </c:otherwise>
                         </c:choose>
                     </li>
                 </ul>
             </nav>
             <!-- End of Topbar -->
+

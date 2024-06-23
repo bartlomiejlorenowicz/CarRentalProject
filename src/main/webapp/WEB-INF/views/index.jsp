@@ -8,7 +8,9 @@
     <!-- Login Message for Non-Logged In Users -->
     <c:if test="${empty sessionScope.user}">
         <div class="login-message">
-            Zaloguj się, aby wypożyczyć samochód
+            Zaloguj się, aby wypożyczyć samochód lub załóż konto.
+            <br>
+            <a class="btn btn-primary" href="<c:url value='/users/register' />">Rejestracja</a>
         </div>
     </c:if>
     <div class="main-content">
