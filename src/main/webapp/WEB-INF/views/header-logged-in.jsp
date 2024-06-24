@@ -53,9 +53,15 @@
                 <span>Moje rezerwacje</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value='/cars/top-rated' />">
+                <i class="fas fa-fw fa-star"></i>
+                <span>Najlepiej oceniane</span>
+            </a>
+        </li>
         <!-- Nav Item - Contact -->
         <li class="nav-item">
-            <a class="nav-link" href="<c:url value='/contact' />">
+            <a class="nav-link" href="<c:url value='/contact/form' />">
                 <i class="fas fa-fw fa-envelope"></i>
                 <span>Kontakt</span>
             </a>

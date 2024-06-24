@@ -49,14 +49,14 @@ public class UserController {
     @GetMapping("/dashboard")
     public String showDashBoard(HttpSession session, Model model) {
         if (session.getAttribute("user") == null) {
-            return "redirect:/login";
+            return "redirect:/users/login";
         }
         return "dashboard";
     }
 
     @GetMapping("/login")
     public String showLoginForm(Model model) {
-        model.addAttribute("header", "header.jsp");
+
         return "login";
     }
 

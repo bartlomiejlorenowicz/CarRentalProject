@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp" />
+<jsp:include page="header-conditional.jsp" />
 
 <div class="container-fluid content-wrapper">
     <h1 class="h3 mb-4 text-gray-800">Szczegóły Samochodu</h1>

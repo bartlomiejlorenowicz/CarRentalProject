@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<jsp:include page="header-logged-in.jsp" />
+<jsp:include page="header-conditional.jsp" />
 
 <div class="container-fluid" style="margin-left: 220px;">
     <h1 class="h3 mb-4 text-gray-800">Your Reservations</h1>

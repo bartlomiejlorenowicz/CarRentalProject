@@ -4,6 +4,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +17,7 @@ import pl.rental.service.ReviewService;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/reviews")
 public class ReviewController {
 
@@ -48,10 +49,9 @@ public class ReviewController {
         return new ModelAndView(new RedirectView("/cars/" + carId));
     }
 
-    @GetMapping("/top-rated")
+        @GetMapping("/top-rated")
     public String showTopRatedCars(Model model) {
-        List<Car> topRatedCars = reviewService.getTopRatedCars();
-        model.addAttribute("topRatedCars", topRatedCars);
+        model.addAttribute("topRatedCars", reviewService.getTopRatedCars());
         return "top-rated-cars";
     }
 
