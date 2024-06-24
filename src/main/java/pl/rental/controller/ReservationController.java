@@ -1,22 +1,18 @@
 package pl.rental.controller;
 
-import com.oracle.wls.shaded.org.apache.xpath.operations.Mod;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.rental.model.Reservation;
 import pl.rental.model.User;
 import pl.rental.service.CarDataService;
 import pl.rental.service.ReservationService;
 import pl.rental.service.UserService;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/reservations")
@@ -33,16 +29,13 @@ public class ReservationController {
     }
 
     @GetMapping("/user")
-    public String getAllReservationForUser(HttpSession session, Model model) {
+    public String showUserReservations(HttpSession session, Model model) {
         User loggedUser = (User) session.getAttribute("user");
         if (loggedUser == null) {
             return "redirect:/users/login";
         }
-        List<Reservation> allReservation = reservationService.getAllReservation();
-        List<Reservation> userReservation = allReservation.stream()
-                .filter(reservation -> reservation.getUser().getUserId().equals(loggedUser.getUserId()))
-                .collect(Collectors.toList());
-        model.addAttribute("userReservation", userReservation);
+        List<Reservation> userReservations = reservationService.getAllReservationByUser(loggedUser.getUserId());
+        model.addAttribute("userReservations", userReservations);
         return "show-all-reservation-logged-user";
     }
 

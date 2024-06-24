@@ -1,32 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Car Rental - Dashboard</title>
-    <link href="<c:url value='/static/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
-    <link href="<c:url value='/static/css/sb-admin-2.min.css' />" rel="stylesheet">
-    <style>
-        .sidebar-left {
-            position: fixed;
-            top: 0;
-            height: 100%;
-            width: 200px;
-            background-color: #f8f9fc;
-            padding-top: 20px;
-            z-index: 1;
-        }
-        .sidebar-left {
-            left: 0;
-        }
-        .content-wrapper {
-            margin-left: 220px; /* Dodanie marginesu aby uwzględnić szerokość panelu bocznego */
-        }
-    </style>
-</head>
-<body>
+<jsp:include page="header.jsp" />
+
 <div id="wrapper">
     <!-- Left Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion sidebar-left" id="accordionSidebar">
@@ -46,11 +22,18 @@
                 <span>Lista samochodów</span>
             </a>
         </li>
-        <!-- Nav Item - My Reservation -->
+        <!-- Nav Item - Top Rated -->
         <li class="nav-item">
-            <a class="nav-link" href="<c:url value='/reservations/user' />">
+            <a class="nav-link" href="<c:url value='/top-rated' />">
                 <i class="fas fa-fw fa-star"></i>
-                <span>Moje rezerwacje</span>
+                <span>Najlepiej oceniane</span>
+            </a>
+        </li>
+        <!-- Nav Item - Review Car -->
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value='/cars/review' />">
+                <i class="fas fa-fw fa-star"></i>
+                <span>Oceń samochód</span>
             </a>
         </li>
         <!-- Nav Item - Contact -->
@@ -86,20 +69,50 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="<c:url value='/profile' />">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profil
+                                Profile
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="<c:url value='/users/logout' />">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Wyloguj się
+                                Logout
                             </a>
                         </div>
                     </li>
                 </ul>
             </nav>
             <!-- End of Topbar -->
+
+            <div class="container-fluid">
+                <h1 class="h3 mb-4 text-gray-800">Szczegóły Samochodu</h1>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">${car.make} ${car.model}</h6>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Rok:</strong> ${car.year}</p>
+                        <p><strong>Typ:</strong> ${car.type}</p>
+                        <p><strong>Cena:</strong> ${car.price}</p>
+                        <p><strong>Średnia Ocena:</strong> ${car.averageRating}</p>
+
+                        <h5 class="mt-4">Oceń ten samochód</h5>
+                        <form action="<c:url value='/reviews/add' />" method="post">
+                            <input type="hidden" name="carId" value="${car.carId}" />
+                            <div class="form-group">
+                                <label for="rating">Ocena (1-5)</label>
+                                <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Komentarz</label>
+                                <textarea id="comment" name="comment" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Dodaj Ocenę</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
-</body>
-</html>
+
+<jsp:include page="footer.jsp" />

@@ -13,6 +13,7 @@
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">New Reservation</h1>
+                                    <a href="<c:url value='/users/dashboard' />" class="btn btn-secondary btn-back">Powrót do dashboardu</a>
                                 </div>
                                 <form action="<c:url value='/reservations/save' />" method="post">
                                     <div class="form-group">

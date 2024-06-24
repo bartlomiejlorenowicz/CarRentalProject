@@ -108,4 +108,17 @@ public class CarDataService {
         }
         return uniqueTypes;
     }
+
+    public Car findById(Long id) {
+        return carRepository.findById(id).orElseThrow(() -> new RuntimeException("Car not found"));
+    }
+
+    public Car getCarById(Long carId) {
+        Optional<Car> carOptional = carRepository.findById(carId);
+        if (carOptional.isPresent()) {
+            return carOptional.get();
+        } else {
+            throw new RuntimeException("Car not found with id: " + carId);
+        }
+    }
 }

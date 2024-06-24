@@ -14,7 +14,6 @@
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Reservation ID</th>
                         <th>Car</th>
                         <th>Reservation Date</th>
                         <th>Return Date</th>
@@ -24,13 +23,13 @@
                     <tbody>
                     <c:forEach var="reservation" items="${userReservations}">
                         <tr>
-                            <td>${reservation.reservationId}</td>
                             <td>${reservation.car.make} ${reservation.car.model}</td>
                             <td>${reservation.reservationDate}</td>
                             <td>${reservation.returnDate}</td>
                             <td>${reservation.paymentStatus}</td>
                         </tr>
                     </c:forEach>
+                    <a href="<c:url value='/users/dashboard' />" class="btn btn-secondary btn-back">Powrót do dashboardu</a>
                     </tbody>
                 </table>
             </div>

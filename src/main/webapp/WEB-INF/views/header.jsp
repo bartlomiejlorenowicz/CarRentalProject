@@ -8,6 +8,7 @@
     <title>Car Rental</title>
     <link href="<c:url value='/static/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/static/css/sb-admin-2.min.css' />" rel="stylesheet">
+    <link href="<c:url value='/static/css/style.css' />" rel="stylesheet">
     <style>
         .main-content {
             display: flex;
@@ -79,7 +80,7 @@
         </li>
         <!-- Nav Item - Top Rated -->
         <li class="nav-item">
-            <a class="nav-link" href="<c:url value='/top-rated' />">
+            <a class="nav-link" href="<c:url value='/cars/top-rated' />">
                 <i class="fas fa-fw fa-star"></i>
                 <span>Najlepiej oceniane</span>
             </a>

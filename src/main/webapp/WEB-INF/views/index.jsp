@@ -31,6 +31,9 @@
             </select>
             <button type="submit" class="btn btn-primary btn-block">Wyszukaj</button>
         </form>
+        <div class="text-center">
+            <a class="btn btn-secondary mt-3" href="<c:url value='/cars/top-rated' />">Top Rated Cars</a>
+        </div>
     </div>
 </div>
 <!-- End of Main Content -->

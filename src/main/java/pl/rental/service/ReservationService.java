@@ -30,7 +30,7 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
-    public List<Reservation> getAllReservationByUser(User user) {
-        return reservationRepository.findByUserUserId(user);
+    public List<Reservation> getAllReservationByUser(Long userId) {
+        return reservationRepository.findByUserUserId(userId);
     }
 }

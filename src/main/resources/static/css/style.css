@@ -1,0 +1,19 @@
+/* Additional styles for sidebar and content alignment */
+.sidebar-left {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 220px;
+    background-color: #f8f9fc;
+    padding-top: 20px;
+    z-index: 1;
+}
+
+.content-wrapper {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+.container-fluid {
+    overflow: hidden;
+}
