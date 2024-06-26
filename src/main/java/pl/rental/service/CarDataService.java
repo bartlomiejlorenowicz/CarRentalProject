@@ -8,6 +8,9 @@ import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.rental.model.Car;
 import pl.rental.model.api.CarDataResponse;
@@ -21,19 +24,22 @@ import java.util.*;
 @Service
 public class CarDataService {
 
+    private final CarRepository carRepository;
+    public CarDataService(CarRepository carRepository) {
+        this.carRepository = carRepository;
+    }
+
+
     @Value("${api.key}")
     private String apiKey;
 
     @Value("${api.host}")
     private String apiHost;
-    private final String apiUrl = "https://car-data.p.rapidapi.com/cars";
 
-    private CarRepository carRepository;
+    @Value("{api.url")
+    private String apiUrl;
+
     private static Logger logger = LoggerFactory.getLogger(CarDataService.class);
-
-    public CarDataService(CarRepository carRepository) {
-        this.carRepository = carRepository;
-    }
 
     public void fetchAndSaveCarData(Map<String, String> queryParams) {
         OkHttpClient client = new OkHttpClient();
@@ -120,5 +126,9 @@ public class CarDataService {
         } else {
             throw new RuntimeException("Car not found with id: " + carId);
         }
+    }
+
+    public Page<Car> getCarsPaginated(PageRequest page) {
+        return carRepository.findAll(page);
     }
 }

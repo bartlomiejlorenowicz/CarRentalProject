@@ -3,6 +3,7 @@ package pl.rental.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -28,6 +29,11 @@ public class Reservation {
     private LocalDateTime returnDate;
 
     @Column(nullable = false)
-
     private String paymentStatus;
+
+    @Column(nullable = false)
+    private BigDecimal dailyPrice;
+
+    @Column(nullable = false)
+    private Long rentalDays;
 }

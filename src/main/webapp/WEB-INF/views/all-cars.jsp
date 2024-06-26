@@ -31,15 +31,13 @@
 <jsp:include page="header-conditional.jsp" />
 
 <div id="wrapper">
-
-
     <div id="content-wrapper" class="d-flex flex-column content-wrapper">
         <div id="content">
             <div class="container-fluid">
                 <h1 class="h3 mb-4 text-gray-800">Lista Samochodów</h1>
                 <a href="<c:url value='/users/dashboard' />" class="btn btn-secondary btn-back mb-4">Powrót do dashboardu</a>
                 <div class="row">
-                    <c:forEach var="car" items="${cars}">
+                    <c:forEach var="car" items="${carPage.content}">
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
@@ -54,6 +52,14 @@
                             </div>
                         </div>
                     </c:forEach>
+                </div>
+                <div class="pagination">
+                    <c:if test="${carPage.hasPrevious()}">
+                        <a href="?page=${carPage.number - 1}&size=${carPage.size}" class="btn btn-primary">Previous</a>
+                    </c:if>
+                    <c:if test="${carPage.hasNext()}">
+                        <a href="?page=${carPage.number + 1}&size=${carPage.size}" class="btn btn-primary">Next</a>
+                    </c:if>
                 </div>
             </div>
         </div>

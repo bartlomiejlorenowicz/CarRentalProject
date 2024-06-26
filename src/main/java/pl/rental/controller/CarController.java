@@ -1,5 +1,7 @@
 package pl.rental.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +9,6 @@ import pl.rental.model.Car;
 import pl.rental.service.CarDataService;
 import pl.rental.service.ReviewService;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,11 +22,11 @@ public class CarController {
         this.carDataService = carDataService;
         this.reviewService = reviewService;
     }
-
     @GetMapping("/cars/top-rated")
     public String showTopRatedCars(Model model) {
         model.addAttribute("topRatedCars", reviewService.getTopRatedCars());
         return "top-rated-cars";
+
     }
 
     @GetMapping("/{id}")
@@ -43,9 +44,11 @@ public class CarController {
     }
 
     @GetMapping("/cars")
-    public String getCars(Model model) {
-        List<Car> allCars = carDataService.getAllCars();
-        model.addAttribute("cars", allCars);
+    public String getCars(@RequestParam(defaultValue = "0") int page,
+                          @RequestParam(defaultValue = "9") int size,
+                          Model model) {
+        Page<Car> carPage = carDataService.getCarsPaginated(PageRequest.of(page, size));
+        model.addAttribute("carPage", carPage);
         return "all-cars";
     }
 

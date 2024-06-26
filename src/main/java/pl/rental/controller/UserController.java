@@ -55,8 +55,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String showLoginForm(Model model) {
-
+    public String showLoginForm() {
         return "login";
     }
 
@@ -78,5 +77,37 @@ public class UserController {
     public String logoutUser(HttpSession session) {
         session.invalidate();
         return "redirect:/users/login";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+        model.addAttribute("user", user);
+        return "profile";
+    }
+
+    @PostMapping("/profile/update")
+    public String updateProfile(@ModelAttribute("user") UserDto userDto, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+
+        user.setEmail(userDto.getEmail());
+        Address address = user.getAddress();
+        address.setStreet(userDto.getStreet());
+        address.setCity(userDto.getCity());
+        address.setZipCode(userDto.getZipCode());
+        address.setCountry(userDto.getCountry());
+
+        userService.saveUser(user);
+        userService.saveAddress(address);
+
+        session.setAttribute("user", user);
+        model.addAttribute("success", "Profile updated successfully");
+        return "profile";
     }
 }

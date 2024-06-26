@@ -31,6 +31,9 @@ public class Car {
     @Column(nullable = false)
     private String type;
 
+    @Column(nullable = false)
+    private BigDecimal dailyPrice;
+
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 

@@ -39,6 +39,12 @@
         </a>
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
+        <li class="nav-item">
+            <a class="nav-link" href="<c:url value='/users/dashboard' />">
+                <i class="fas fa-fw fa-envelope"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
         <!-- Nav Item - Cars List -->
         <li class="nav-item">
             <a class="nav-link" href="<c:url value='/cars' />">

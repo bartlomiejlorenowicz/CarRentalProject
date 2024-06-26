@@ -6,12 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.rental.model.Car;
 import pl.rental.model.Reservation;
 import pl.rental.model.User;
 import pl.rental.service.CarDataService;
 import pl.rental.service.ReservationService;
 import pl.rental.service.UserService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller

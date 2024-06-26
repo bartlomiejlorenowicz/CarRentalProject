@@ -8,7 +8,7 @@
         <div class="col-xl-10 col-lg-12 col-md-9">
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
-                    <div class="row">
+                    <div class="row">profile
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center">
@@ -19,7 +19,7 @@
                                     <a href="<c:url value='/cars' />" class="btn btn-primary btn-user btn-block">View Cars</a>
                                     <a href="<c:url value='/reservations/user' />" class="btn btn-secondary btn-user btn-block">View Reservations</a>
                                     <a href="<c:url value='/reservations/new' />" class="btn btn-secondary btn-user btn-block">Add Reservations</a>
-                                    <a href="<c:url value='/profile' />" class="btn btn-info btn-user btn-block">Manage Profile</a>
+                                    <a href="<c:url value='/users/profile' />" class="btn btn-info btn-user btn-block">Manage Profile</a>
                                     <a href="<c:url value='/users/logout' />" class="btn btn-danger btn-user btn-block">Logout</a>
                                 </div>
                             </div>
