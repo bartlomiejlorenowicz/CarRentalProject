@@ -32,9 +32,6 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion sidebar-left" id="accordionSidebar">
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
             <div class="sidebar-brand-text mx-3">Car Rental</div>
         </a>
         <!-- Divider -->
@@ -49,27 +46,27 @@
         <li class="nav-item">
             <a class="nav-link" href="<c:url value='/cars' />">
                 <i class="fas fa-fw fa-car"></i>
-                <span>Lista samochodów</span>
+                <span>Car list</span>
             </a>
         </li>
         <!-- Nav Item - My Reservation -->
         <li class="nav-item">
             <a class="nav-link" href="<c:url value='/reservations/user' />">
                 <i class="fas fa-fw fa-star"></i>
-                <span>Moje rezerwacje</span>
+                <span>My reservations</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<c:url value='/cars/top-rated' />">
                 <i class="fas fa-fw fa-star"></i>
-                <span>Najlepiej oceniane</span>
+                <span>Top rated</span>
             </a>
         </li>
         <!-- Nav Item - Contact -->
         <li class="nav-item">
             <a class="nav-link" href="<c:url value='/contact/form' />">
                 <i class="fas fa-fw fa-envelope"></i>
-                <span>Kontakt</span>
+                <span>Contact</span>
             </a>
         </li>
     </ul>
@@ -92,7 +89,7 @@
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 ${sessionScope.user.username}
                             </span>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            <img class="img-profile rounded-circle" src="<c:url value='/static/img/user_image.jpg' />" alt="User profile image">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -103,7 +100,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="<c:url value='/users/logout' />">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Wyloguj się
+                                Log out
                             </a>
                         </div>
                     </li>

@@ -17,7 +17,9 @@
                         <th>Car</th>
                         <th>Reservation Date</th>
                         <th>Return Date</th>
-                        <th>Payment Status</th>
+                        <th>Daily Price</th>
+                        <th>Rental Days</th>
+                        <th>Total Price</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,12 +28,16 @@
                             <td>${reservation.car.make} ${reservation.car.model}</td>
                             <td>${reservation.reservationDate}</td>
                             <td>${reservation.returnDate}</td>
-                            <td>${reservation.paymentStatus}</td>
+                            <td>${reservation.dailyPrice}</td>
+                            <td>${reservation.rentalDays}</td>
+                            <td>${reservation.totalPrice}</td>
                         </tr>
                     </c:forEach>
-                    <a href="<c:url value='/users/dashboard' />" class="btn btn-secondary btn-back">Powrót do dashboardu</a>
                     </tbody>
                 </table>
+                <div class="text-center mt-4">
+                    <a href="<c:url value='/users/dashboard' />" class="btn btn-secondary">Powrót do dashboardu</a>
+                </div>
             </div>
         </div>
     </div>

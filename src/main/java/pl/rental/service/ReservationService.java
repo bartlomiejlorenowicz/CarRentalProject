@@ -27,10 +27,13 @@ public class ReservationService {
 
     @Transactional
     public void saveReservation(Reservation reservation, User user) {
+        if (reservation.getReturnDate().isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Return date cannot be in the past.");
+        }
+
         reservation.setUser(user);
         reservation.setPaymentStatus("Pending");
         reservation.setReservationDate(LocalDateTime.now());
-
 
         Random random = new Random();
         BigDecimal randomDailyPrice = BigDecimal.valueOf(30 + (100 - 30) * random.nextDouble());
@@ -38,6 +41,13 @@ public class ReservationService {
 
         long rentalDays = ChronoUnit.DAYS.between(reservation.getReservationDate().toLocalDate(), reservation.getReturnDate().toLocalDate());
         reservation.setRentalDays(rentalDays);
+
+        BigDecimal totalPrice = randomDailyPrice.multiply(BigDecimal.valueOf(rentalDays));
+        reservation.setTotalPrice(totalPrice);
+
+        if (reservation.getDailyPrice() == null || reservation.getTotalPrice() == null) {
+            throw new IllegalArgumentException("Prices cannot be null");
+        }
 
         reservationRepository.save(reservation);
     }

@@ -2,6 +2,7 @@ package pl.rental.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ public class Reservation {
     private Car car;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime reservationDate;
 
     @Column(nullable = false)
@@ -36,4 +38,7 @@ public class Reservation {
 
     @Column(nullable = false)
     private Long rentalDays;
+
+    @Column(nullable = false)
+    private BigDecimal totalPrice;
 }

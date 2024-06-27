@@ -8,9 +8,9 @@
     <!-- Login Message for Non-Logged In Users -->
     <c:if test="${empty sessionScope.user}">
         <div class="login-message text-center my-4">
-            Zaloguj się, aby wypożyczyć samochód lub załóż konto.
+            Log in to rent a car or create an account.
             <br>
-            <a class="btn btn-primary mt-2" href="<c:url value='/users/register' />">Rejestracja</a>
+            <a class="btn btn-primary mt-2" href="<c:url value='/users/register' />">Registration</a>
         </div>
     </c:if>
     <div class="main-content row justify-content-center">
@@ -19,28 +19,28 @@
                 <img src="<c:url value='/static/img/car-image.jpg' />" alt="Car Image" class="img-fluid">
             </div>
             <form class="rental-form border p-4 rounded" action="/cars/search" method="post">
-                <h2 class="text-center mb-4">Wyszukaj samochód</h2>
+                <h2 class="text-center mb-4">Search for a car</h2>
                 <div class="form-group">
-                    <input type="text" class="form-control mb-3" name="make" placeholder="Marka">
+                    <input type="text" class="form-control mb-3" name="make" placeholder="Make">
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control mb-3" name="model" placeholder="Model">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control mb-3" name="year" placeholder="Rok">
+                    <input type="number" class="form-control mb-3" name="year" placeholder="Year">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control mb-3" name="price" placeholder="Cena maksymalna">
+                    <input type="number" class="form-control mb-3" name="price" placeholder="Maximum price">
                 </div>
                 <div class="form-group">
                     <select name="type" class="form-control mb-3">
-                        <option value="">Typ</option>
+                        <option value="">Type</option>
                         <c:forEach var="type" items="${carTypes}">
                             <option value="${type}">${type}</option>
                         </c:forEach>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Wyszukaj</button>
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
             </form>
             <div class="text-center mt-4">
                 <a class="btn btn-secondary" href="<c:url value='/cars/top-rated' />">Top Rated Cars</a>
