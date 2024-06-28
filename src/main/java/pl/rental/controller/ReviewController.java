@@ -49,7 +49,7 @@ public class ReviewController {
         return new ModelAndView(new RedirectView("/cars/" + carId));
     }
 
-        @GetMapping("/top-rated")
+    @GetMapping("/top-rated")
     public String showTopRatedCars(Model model) {
         model.addAttribute("topRatedCars", reviewService.getTopRatedCars());
         return "top-rated-cars";
