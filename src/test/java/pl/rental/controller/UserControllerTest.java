@@ -1,6 +1,7 @@
 package pl.rental.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -113,7 +114,7 @@ public class UserControllerTest {
         String viewName = userController.showProfile(session, model);
 
         verify(model).addAttribute("user", user);
-        assertEquals("profile", viewName);
+        Assertions.assertEquals("profile", viewName);
     }
 
     @Test
